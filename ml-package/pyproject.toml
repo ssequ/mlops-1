@@ -1,0 +1,48 @@
+[project]
+name = "ml-package"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy (>=2.2.5,<3.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "ml_package", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+mypy = "^1.15.0"
+ruff = "^0.11.7"
+bandit = "^1.8.3"
+pytest-cov = "^6.1.1"
+
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint] #https://docs.astral.sh/ruff/rules
+extend-select = ["E501"]
+
+[tool.bandit]
+exclude_dirs = [
+  "src/bandit_excluded.py",
+  "test"
+]
+
+[tool.pytest.ini_options]
+addopts = """
+          --cov-fail-under=95 \
+          --cov-report=xml \
+          --cov-report=term-missing \
+          --cov-config=.coveragerc
+          """
